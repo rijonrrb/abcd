@@ -4,9 +4,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
@@ -395,24 +393,10 @@
     <div class="wrapper">
         <div class="d-md-flex align-items-md-center">
             <div class="h3">Fruits and vegetables</div>
-            <div class="ml-auto d-flex align-items-center views">
-                <div class="d-none d-lg-block  align-self-stretch ml-3 mr-0">
-                    <div class="nav-cart-box dropdown h-100" id="cart_items" style="scale: 1.2;">
-                        <a href="javascript:void(0)" class="d-flex align-items-center text-reset h-100">
-                            <i class="fas fa-shopping-cart fa-lg" style="color: #000000;"></i>
-                            <span class="flex-grow-1 ml-1 mb-3">
-                                @if (!empty($count))
-                                    <span class="badge badge-primary badge-inline badge-pill cart-count"
-                                        style="color: #fff !important;background-color:#ff6a00 !important">{{ $count }}</span>
-                                @else
-                                    <span class="badge badge-primary badge-inline badge-pill cart-count"
-                                        style="color: #fff !important;background-color:#ff6a00 !important">0</span>
-                                @endif
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <div class="ml-auto d-flex align-items-center views"> <span class="btn text-success"> <span
+                        class="fas fa-th px-md-2 px-1"></span><span>Grid view</span> </span> <span class="btn"> <span
+                        class="fas fa-list-ul"></span><span class="px-md-2 px-1">List view</span> </span> <span
+                    class="green-label px-md-2 px-1">428</span> <span class="text-muted">Products</span> </div>
         </div>
         <div class="d-lg-flex align-items-lg-center pt-2">
             <div class="form-inline d-flex align-items-center my-2 mr-lg-2 radio bg-light border"> <label
@@ -435,6 +419,13 @@
                     <option value="USA">USA</option>
                     <option value="Uk">UK</option>
                 </select> </div>
+        </div>
+        <div class="d-sm-flex align-items-sm-center pt-2 clear">
+            <div class="text-muted filter-label">Applied Filters:</div>
+            <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2">Selected Filtre <span
+                    class=" px-1 close">&times;</span> </div>
+            <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0">Selected Filtre <span
+                    class=" px-1 close">&times;</span> </div>
         </div>
         <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse"
                 data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span
@@ -575,85 +566,253 @@
             <section id="products">
                 <div class="container py-3">
                     <div class="row">
-                        @foreach ($lastProducts as $lastProduct)
-                            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mb-4">
-                                <form action="{{ route('buyproduct') }}" method="post">
-                                    {{ csrf_field() }}
-                                    <div class="card p-2" style="border-radius: 15px;">
-                                        <div class="d-flex justify-content-center p-3">
-                                            <p class="lead mb-0">{{ $lastProduct->name }}</p>
-                                        </div>
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
-                                            class="card-img-top" alt="Laptop" />
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between">
-                                                <p class="small"><a href="#!"
-                                                        class="text-muted">{{ $lastProduct->category }}</a></p>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <h5 class="mb-0" style="display:inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">{{ $lastProduct->description }}</h5>
-                                            </div>
-
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
-                                                        class="fw-bold">{{ $lastProduct->stock }}</span></p>
-                                                <div class="ms-auto text-warning" style="scale: 0.9;">
-                                                    @if ($lastProduct->rating == '5')
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    @elseif($lastProduct->rating == '4')
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    @elseif($lastProduct->rating == '3')
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    @elseif($lastProduct->rating == '2')
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    @elseif($lastProduct->rating == '1')
-                                                        <i class="fa fa-star"></i>
-                                                    @endif
-
-                                                </div>
-                                            </div>
-
-                                            <div class="bottom-wrap">
-                                              <button type="submit" class="btn  btn-primary float-right"> Add
-                                                Cart </button>
-                                                <div class="price-wrap">
-                                                    <span class="price h5">{{ $lastProduct->price }}</span> <br> <small
-                                                        class="text-success">Free
-                                                        shipping</small>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <input type="hidden" id="pname" name="pname"
-                                            value={{ $lastProduct->name }}>
-                                        <input type="hidden" id="pcategory" name="pcategory"
-                                            value="{{ $lastProduct->category }}">
-                                        <input type="hidden" id="pdescription" name="pdescription"
-                                            value="{{ $lastProduct->description }}">
-                                        <input type="hidden" id="pprice" name="pprice"
-                                            value="{{ $lastProduct->price }}">
+                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                            <div class="card p-2" style="border-radius: 15px;">
+                                <div class="d-flex justify-content-center p-3">
+                                    <p class="lead mb-0">HP Notebook</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+                                    class="card-img-top" alt="Laptop" />
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
                                     </div>
-                                </form>
+
+                                    <div class="mb-3">
+                                        <h5 class="mb-0">HP Notebook</h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
+                                                class="fw-bold">6</span></p>
+                                        <div class="ms-auto text-warning" style="scale: 0.9;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-wrap">
+                                        <a href="#" class="btn  btn-primary float-right" data-abc="true"> Add
+                                            Cart </a>
+                                        <div class="price-wrap">
+                                            <span class="price h5">$999</span> <br> <small class="text-success">Free
+                                                shipping</small>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="row d-flex justify-content-end mt-2">
-                        {{ $lastProducts->links('pagination::bootstrap-5') }}
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-md-0 pt-4">
+                            <div class="card p-2" style="border-radius: 15px;">
+                                <div class="d-flex justify-content-center p-3">
+                                    <p class="lead mb-0">HP Notebook</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+                                    class="card-img-top" alt="Laptop" />
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <h5 class="mb-0">HP Notebook</h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
+                                                class="fw-bold">6</span></p>
+                                        <div class="ms-auto text-warning" style="scale: 0.9;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-wrap">
+                                        <a href="#" class="btn  btn-primary float-right" data-abc="true"> Add
+                                            Cart </a>
+                                        <div class="price-wrap">
+                                            <span class="price h5">$999</span> <br> <small class="text-success">Free
+                                                shipping</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-0 pt-4">
+                            <div class="card p-2" style="border-radius: 15px;">
+                                <div class="d-flex justify-content-center p-3">
+                                    <p class="lead mb-0">HP Notebook</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+                                    class="card-img-top" alt="Laptop" />
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <h5 class="mb-0">HP Notebook</h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
+                                                class="fw-bold">6</span></p>
+                                        <div class="ms-auto text-warning" style="scale: 0.9;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-wrap">
+                                        <a href="#" class="btn  btn-primary float-right" data-abc="true"> Add
+                                            Cart </a>
+                                        <div class="price-wrap">
+                                            <span class="price h5">$999</span> <br> <small class="text-success">Free
+                                                shipping</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                            <div class="card p-2" style="border-radius: 15px;">
+                                <div class="d-flex justify-content-center p-3">
+                                    <p class="lead mb-0">HP Notebook</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+                                    class="card-img-top" alt="Laptop" />
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <h5 class="mb-0">HP Notebook</h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
+                                                class="fw-bold">6</span></p>
+                                        <div class="ms-auto text-warning" style="scale: 0.9;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-wrap">
+                                        <a href="#" class="btn  btn-primary float-right" data-abc="true"> Add
+                                            Cart </a>
+                                        <div class="price-wrap">
+                                            <span class="price h5">$999</span> <br> <small class="text-success">Free
+                                                shipping</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                            <div class="card p-2" style="border-radius: 15px;">
+                                <div class="d-flex justify-content-center p-3">
+                                    <p class="lead mb-0">HP Notebook</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+                                    class="card-img-top" alt="Laptop" />
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <h5 class="mb-0">HP Notebook</h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
+                                                class="fw-bold">6</span></p>
+                                        <div class="ms-auto text-warning" style="scale: 0.9;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-wrap">
+                                        <a href="#" class="btn  btn-primary float-right" data-abc="true"> Add
+                                            Cart </a>
+                                        <div class="price-wrap">
+                                            <span class="price h5">$999</span> <br> <small class="text-success">Free
+                                                shipping</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                            <div class="card p-2" style="border-radius: 15px;">
+                                <div class="d-flex justify-content-center p-3">
+                                    <p class="lead mb-0">HP Notebook</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+                                    class="card-img-top" alt="Laptop" />
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <h5 class="mb-0">HP Notebook</h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <p class="text-muted mb-0" style="font-size: 0.95em;">Available: <span
+                                                class="fw-bold">6</span></p>
+                                        <div class="ms-auto text-warning" style="scale: 0.9;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-wrap">
+                                        <a href="#" class="btn  btn-primary float-right" data-abc="true"> Add
+                                            Cart </a>
+                                        <div class="price-wrap">
+                                            <span class="price h5">$999</span> <br> <small class="text-success">Free
+                                                shipping</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </div>
 </body>
-<html>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</html>

@@ -26,6 +26,6 @@ Route::get('/Login/form', function () {return view('login');})->name('login');
 Route::get('/',[ProductController::class, 'Productlist'])->name('welcome');
 Route::get('/Cart',[ProductController::class, 'cart'])->name('cart');
 Route::get('/Cart/{id}',[ProductController::class, 'deletecart'])->name('deletecart');
-
+Route::get('/Products', function () {return view('product');})->name('Products');
 
 

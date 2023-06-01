@@ -30,6 +30,8 @@ class ProductController extends Controller
           $Product->category = $request->category;
           $Product->description = $request->description;
           $Product->price = $request->price;
+          $Product->stock = $request->stock;
+          $Product->rating = $request->star;
           $result = $Product->save();
           if($result){
             return redirect()->back()->with('success', 'Product added');
@@ -53,7 +55,7 @@ class ProductController extends Controller
     }
     public function Productlist(){
         $count = Sold::where('sid',Session::getId())->count();
-        $lastProducts = Product::paginate(8);
+        $lastProducts = Product::paginate(6);
         return view('welcome')->with('lastProducts', $lastProducts)->with('count', $count);
     }
     public function cart(){   
